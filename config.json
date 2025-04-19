@@ -1,0 +1,21 @@
+{
+    "model_source": "serac2_cross_pack_07_03_2025.pt",
+    "plc_ip": "192.168.20.124",
+    "conf": 0.5,
+    "y_axis": 450,
+    "y_condition": "<=",
+    "lower_bound": [
+        90,
+        50,
+        50
+    ],
+    "upper_bound": [
+        130,
+        255,
+        255
+    ],
+    "class_sku": 4,
+    "pixel_ratio": 0.4,
+    "output_dir": "comfort_blue_cross_pack",
+    "product_id": 2
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>INDUS VISION</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="https://eimkeia.stripocdn.email/content/guids/CABINET_8270216c780e362a1fbcd636b59c67ae376eb446dc5f95e17700b638b8c3f618/images/indus_logo_dev.png"
+                    alt="Indus Logo">
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-button active" onclick="loadContent('code')">
+                <i class="fas fa-code"></i>
+                Code
+            </button>
+            <button class="nav-button" onclick="loadContent('camera')">
+                <i class="fas fa-camera"></i>
+                Camera
+            </button>
+            <button class="nav-button" onclick="loadContent('machine_status')">
+                <i class="fas fa-cogs"></i>
+                Machine Status
+            </button>
+            <button class="nav-button" onclick="loadContent('images')">
+                <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                Defect Toggle
+            </button>
+            <button class="nav-button" onclick="openDashboard()">
+                <i class="fas fa-cube"></i>
+                Dashboard
+            </button>
+            <button class="nav-button" onclick="loadContent('data_collection', event)">
+                <i class="fas fa-file-code"></i>
+                Data Collection
+            </button>
+            
+            
+           
+
+
+            <!-- Add this button in your sidebar navigation section -->
+            <!-- <button class="nav-button" data-section="sku">
+                <i class="fas fa-box-open"></i> SKU Config
+            </button> -->
+            <!--  Added Logout Button -->
+            <button class="nav-button logout-button" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+        </div>
+    </div>
+    <div class="main-content" id="mainContent"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+{
+    "scripts": {
+        "1": {
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
+            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main1.py"
+        },
+        "2": {
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
+            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+        },
+        "3": {
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
+            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+        },
+        "4": {
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
+            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+        },
+        "5": {
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
+            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+        }
+    }
+}

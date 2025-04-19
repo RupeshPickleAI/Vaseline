@@ -1,0 +1,19 @@
+{
+    "users": [
+      {
+        "username": "hul",
+        "password": "hul",
+        "permissions": ["defect_toggles", "data_collection"]
+      },
+      {
+        "username": "123",
+        "password": "123",
+        "permissions": ["defect_toggles"]
+      },
+      {
+        "username": "123",
+        "password": "123",
+        "permissions": ["data_collection"]
+      }
+    ]
+  }

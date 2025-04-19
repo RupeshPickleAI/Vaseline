@@ -1,0 +1,9 @@
+{
+    "ocr_light_tag": "TURNOFF_LIGHT",
+    "ocr_camera_config": "path/to/config",
+    "ocr_tear_conf": 0.1,
+    "ocr_default_conf": 0.05,
+    "product_id": 2,
+    "ocr_count": 29,
+    "double_ocr_count": 40
+}

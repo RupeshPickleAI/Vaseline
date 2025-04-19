@@ -1,0 +1,14 @@
+{
+    "model_weights": "path/to/model",
+    "camera_config": "path/to/config",
+    "tear_confidence": 0.4,
+    "default_confidence": 0.4,
+    "product_id": 2,
+    "loose_cap_height": 20,
+    "loose_cap_class": 3,
+    "dent_class": 2,
+    "tear_class": 4,
+    "cap_class": 1,
+    "sleeve_class": 1,
+    "inner_cap": 1
+}

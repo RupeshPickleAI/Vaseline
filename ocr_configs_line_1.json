@@ -1,0 +1,9 @@
+{
+    "camera_config": "path/to/config",
+    "camera_serial_number": "",
+    "default_conf": 0.1,
+    "iou_thersh": 0.95,
+    "ocr_count": 0.05,
+    "start_offset": 5,
+    "bit_offset": 2
+}

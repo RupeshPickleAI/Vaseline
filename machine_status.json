@@ -1,0 +1,24 @@
+[
+    {
+        "machine_name":"Machine1",
+        "status":0
+    },
+    {
+        "machine_name":"Machine2",
+        "status":1
+    },
+    {
+        "machine_name":"Machine3",
+        "status":0
+    },
+    {
+        "machine_name":"Machine4",
+        "status":0
+    },{
+        "machine_name":"Machine5",
+        "status":1
+    },{
+        "machine_name":"Machine6",
+        "status":0
+    }
+]
