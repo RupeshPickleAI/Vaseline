@@ -4,18 +4,34 @@ let currentPage = 1;
 let imagesPerPage = 10;
 let allImages = [];
 
+// state variable for 
 let line1Scripts = null;
 let line2Scripts = null;
+let lastSection = 'code';
+
+// New state variables to track SKU selection
+let selectedSkuState = {
+    'Line 1': {
+        selectedIndex: null,
+        selectedLabel: null,
+        buttonsDisabled: false
+    },
+    'Line 2': {
+        selectedIndex: null,
+        selectedLabel: null,
+        buttonsDisabled: false
+    }
+};
 
 // Function to load script configurations
 async function loadScriptConfigs() {
     try {
         const line1Response = await fetch('C:/Users/Rupesh/demoprojects/GUI/line1_config.json');
         const line2Response = await fetch('C:/Users/Rupesh/demoprojects/GUI/line2_config.json');
-        
+
         line1Scripts = await line1Response.json();
         line2Scripts = await line2Response.json();
-        
+
         console.log('Script configurations loaded successfully');
     } catch (error) {
         console.error('Error loading script configurations:', error);
@@ -23,7 +39,7 @@ async function loadScriptConfigs() {
 }
 
 
-const machineStatusPath = "C:/Users/Rupesh/demoprojects/GUI/machine_status.json";
+// const machineStatusPath = "C:/Users/Rupesh/demoprojects/GUI/machine_status.json";
 
 
 function loadContent(section, event) {
@@ -31,11 +47,21 @@ function loadContent(section, event) {
     document.querySelectorAll('.nav-button').forEach(button => button.classList.remove('active'));
     if (event) event.currentTarget.classList.add('active');
 
-      // Check if section requires authentication
-      if ((section === 'images' || section === 'data_collection') && !authenticatedSections[section]) {
+    // If we're navigating to a new section (not just reloading the same one)
+    // and the new section is not a protected one, reset authentication
+    if (lastSection !== section && section !== 'images' && section !== 'data_collection') {
+        authenticatedSections['images'] = false;
+        authenticatedSections['data_collection'] = false;
+    }
+    
+    // Check if section requires authentication
+    if ((section === 'images' || section === 'data_collection') && !authenticatedSections[section]) {
         showAuthenticationDialog(section, event);
         return;
     }
+    
+    // Update the last section after authentication check but before loading content
+    lastSection = section;
 
     if (section === 'images') {
         mainContent.innerHTML = `
@@ -52,10 +78,10 @@ function loadContent(section, event) {
                     <div class="image-grid" id="imageGrid"></div>
                 </div>
             </div>`;
-        
+
         loadDefectToggles();
     }
-    else if (section === 'code') {
+    else if (section === 'code') { //if you want to add more lines you can do it here by adding one more button here and change the sku button.json 
         mainContent.innerHTML = `
             <div id="code-section" class="content-section active">
                 <div class="section-header">
@@ -74,12 +100,12 @@ function loadContent(section, event) {
                         </div>
                         LINE 2
                     </button>
-                    
+                        
                 </div>
             </div>`;
     }
-    
-    
+
+
     else if (section === 'camera') {
         const mainContent = document.getElementById('mainContent');
         mainContent.innerHTML = `
@@ -123,25 +149,21 @@ function loadContent(section, event) {
             </div>`;
         startCameraUpdates();
     }
-    
-    else if (section === "machine_status") {
-        initializeMachineStatus();
-        startStatusUpdates();
-    }
+
     else if (section === 'data_collection') {
         mainContent.innerHTML = `
         <div id="data-collection-section" class="content-section active">
             <div class="section-header">
-                <h1 class="section-title">Data Collection Settings</h1>
-            </div>11
+                <h1 class="section-title">Data Collection Toggles</h1>
+            </div>
             
             <div class="toggle-container" id="dataCollectionToggleContainer">
                 <!-- Data collection toggles will be dynamically loaded here -->
             </div>
         </div>`;
-    
-    loadDataCollectionToggles(); // Load data collection toggles
-}
+
+        loadDataCollectionToggles(); // Load data collection toggles
+    }
 }
 
 //user authentication for the defect toggles and the data collection 
@@ -153,12 +175,13 @@ let authenticatedSections = {
 };
 
 // Modified showAuthenticationDialog function to create a better popup
+// Modified showAuthenticationDialog function to create a better popup
 function showAuthenticationDialog(section, event) {
     // Create overlay element for dimming the background
     const overlay = document.createElement('div');
     overlay.className = 'auth-overlay';
     document.body.appendChild(overlay);
-    
+
     // Create the authentication popup container
     const authContainer = document.createElement('div');
     authContainer.className = 'auth-container';
@@ -167,7 +190,7 @@ function showAuthenticationDialog(section, event) {
             <i class="fas fa-times"></i>
         </button>
         <div class="auth-header">
-            <h2><i class="fas fa-lock"></i> Authentication</h2>
+            <h2> Authentication</h2>
             <p>Please enter your credentials to access ${section === 'images' ? 'Defect Toggles' : 'Data Collection '}</p>
         </div>
         <div class="auth-form">
@@ -178,33 +201,74 @@ function showAuthenticationDialog(section, event) {
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <i class="fas fa-key input-icon"></i>
-                <input type="password" id="password" placeholder="Enter your password">
+                <i class="fas fa-lock input-icon"></i>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Enter your password">
+                    <i class="fas fa-eye-slash password-toggle" id="togglePassword"></i>
+                </div>
             </div>
             <div class="auth-buttons">
-                <button class="auth-button cancel-button" onclick="closeAuthPopup()">
-                    <i class="fas fa-times"></i> Cancel
-                </button>
-                <button class="auth-button login-button" onclick="authenticateUser('${section}')">
+              
+                <button class="auth-button login-button" id="login-button" onclick="authenticateUser('${section}')">
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
             </div>
             <div id="auth-error" class="auth-error"></div>
         </div>
     `;
-    
+
     overlay.appendChild(authContainer);
-    
+
     // Focus on username input
     setTimeout(() => {
         document.getElementById('username').focus();
-    }, 100);
-    
+    }, 200);
+
     // Add escape key listener to close popup
     document.addEventListener('keydown', handleEscapeKey);
+    
+    // Add event listener for toggling password visibility
+    setTimeout(() => {
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function() {
+                // Toggle password visibility
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                // Toggle icon
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+        
+        // Add event listener for Enter key on username field
+        const usernameInput = document.getElementById('username');
+        if (usernameInput) {
+            usernameInput.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    passwordInput.focus();
+                }
+            });
+        }
+        
+        // Add event listener for Enter key on password field
+        if (passwordInput) {
+            passwordInput.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    authenticateUser(section);
+                }
+            });
+        }
+    }, 300);
 }
-
 // Function to close the authentication popup
+// Function to close authentication popup
+// Modified closeAuthPopup to not force loading code section
 function closeAuthPopup() {
     const overlay = document.querySelector('.auth-overlay');
     if (overlay) {
@@ -212,17 +276,14 @@ function closeAuthPopup() {
     }
     document.removeEventListener('keydown', handleEscapeKey);
     
-    // Reset active button state
+    // Reset active button state but don't automatically load code
     document.querySelectorAll('.nav-button').forEach(button => {
-        if (button.getAttribute('data-section') === 'code') {
+        if (button.getAttribute('data-section') === lastSection) {
             button.classList.add('active');
         } else {
             button.classList.remove('active');
         }
     });
-    
-    // Load default content
-    loadContent('code');
 }
 
 // Close popup when pressing Escape key
@@ -233,6 +294,8 @@ function handleEscapeKey(event) {
 }
 
 // Modified authentication function to show error messages properly
+
+// Updated authentication function to properly handle navigation after auth
 async function authenticateUser(section) {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -262,13 +325,14 @@ async function authenticateUser(section) {
             if ((section === 'images' && user.permissions.includes('defect_toggles')) || 
                 (section === 'data_collection' && user.permissions.includes('data_collection'))) {
                 
-                // Mark section as authenticated for this session
+                // Mark section as authenticated for CURRENT access only
                 authenticatedSections[section] = true;
                 
                 // Close popup
                 closeAuthPopup();
                 
-                // Load the requested section
+                // Load the requested section again (now with authentication)
+                // We need to force it to load without auth dialog this time
                 loadContent(section);
                 
             } else {
@@ -302,7 +366,7 @@ const ToggleJsonPathONE = "C:/Users/Rupesh/demoprojects/GUI/togglesONE.json"; //
 
 // Object to store updated toggle states before submitting
 let updatedToggles = {};
-let updatedTogglesONE ={};
+let updatedTogglesONE = {};
 
 
 
@@ -363,7 +427,7 @@ async function submitToggles() {
 
         // Update defect states
         Object.keys(updatedToggles).forEach(key => {
-            data.defects[key] = updatedToggles[key]  ;
+            data.defects[key] = updatedToggles[key];
         });
 
         // Send updated data to Electron to write to file
@@ -445,61 +509,7 @@ async function submitDataCollectionToggles() {
     }
 }
 
-
-
-
-function initializeMachineStatus() {
-    const container = document.getElementById('mainContent');
-    container.innerHTML = `
-        <div id="machine-status-section" class="content-section active">
-            <div class="machine-status-header">
-                <h1><i class="fas fa-industry"></i> Machine Status Monitor</h1>
-                <p>Real-time monitoring dashboard displaying the operational status of all production units.</p>
-            </div>
-            <div class="status-list" id="statusList"></div>
-        </div>
-    `;
-    updateMachineStatus();
-}
-
-function updateMachineStatus() {
-    fetch('file:///' + machineStatusPath)
-        .then(response => response.json())
-        .then(data => {
-            const statusList = document.getElementById('statusList');
-            if (!statusList) return;
-
-            statusList.innerHTML = data.map(machine => {
-                const statusText = machine.status === 0 ? 'Running' : 'Idle';
-                const statusClass = machine.status === 0 ? 'status-running' : 'status-idle';
-                const statusIcon = machine.status === 0 ? 'fa-spin fa-gear' : 'fa-pause';
-                return `
-                    <div class="machine-item">
-                        <div class="machine-name">
-                            <i class="fas fa-robot"></i>
-                            ${machine.machine_name}
-                        </div>
-                        <div class="status-indicator ${statusClass}">
-                            <i class="fas ${statusIcon}"></i>
-                            ${statusText}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        })
-        .catch(error => console.error('Error loading machine status:', error));
-}
-
-
-
-function startStatusUpdates() {
-    updateMachineStatus();
-    statusInterval = setInterval(updateMachineStatus, 500);
-}
-
-
-
-const cameraJsonPath = "C:/Users/Rupesh/demoprojects/GUI/camera.json" //path for the camera 
+const cameraJsonPath = "C:/Users/Rupesh/demoprojects/GUI/assets/allconfigs/camera.json" //path for the camera 
 
 // Function to update the camera images
 function updateCameras() {
@@ -543,10 +553,6 @@ function stopCameraUpdates() {
     }
 }
 
-
-
-
-
 async function openComfortPage() {
     const skuList = await window.electron.getSkuButtons();
     const mainContent = document.getElementById('mainContent');
@@ -558,24 +564,24 @@ async function openComfortPage() {
             </div>
             <div class="sku-buttons-grid">
                 ${skuList.map((label, index) => {
-                    const isStopCode = label === "STOP CODE";
-                    return `
+        const isStopCode = label === "STOP CODE";
+        return `
                         <button class="sku-button ${isStopCode ? 'stop-code-button' : ''}" 
                                 onclick="handleSkuClick(${index + 1}, '${label}')" 
                                 id="sku-button-${index}">
                             ${label}
                         </button>
                     `;
-                }).join('')}
+    }).join('')}
             </div>
         </div>
     `;
 }
 
-
+// Modified to use the state management system
 async function loadSkuButtons(lineKey) {
-    setCurrentLine(lineKey); // ✅ This is essential to know which line is selected
-
+    setCurrentLine(lineKey); // Set the current line
+    
     const skuData = await window.electron.getSkuButtons(); // should read sku_buttons.json
     const skuList = skuData[lineKey];
 
@@ -593,10 +599,14 @@ async function loadSkuButtons(lineKey) {
             <div class="sku-buttons-grid">
                 ${skuList.map((label, index) => {
                     const isStopCode = label === "STOP CODE";
+                    const isSelected = selectedSkuState[lineKey].selectedIndex === index;
+                    const isDisabled = selectedSkuState[lineKey].buttonsDisabled && !isStopCode && !isSelected;
+                    
                     return `
-                        <button class="sku-button ${isStopCode ? 'stop-code-button' : ''}" 
-                                onclick="handleSkuClick(${index + 1}, '${label}')" 
-                                id="sku-button-${index}">
+                        <button class="sku-button ${isStopCode ? 'stop-code-button' : ''} ${isSelected ? 'active' : ''}" 
+                            onclick="handleSkuClick(${index + 1}, '${label}')" 
+                            id="sku-button-${index}"
+                            ${isDisabled ? 'disabled' : ''}>
                             ${label}
                         </button>
                     `;
@@ -606,23 +616,29 @@ async function loadSkuButtons(lineKey) {
     `;
 }
 
-
-
-//to stop code and Re enable the buttons  for line1 and line2
-
+// Modified to update state
 async function handleSkuClick(scriptNumber, label) {
-    const buttons = document.querySelectorAll('.sku-button');
-
+    const currentLineKey = currentLine; // Get current line
+    const buttonIndex = scriptNumber - 1;
+    
     if (label === "STOP CODE") {
-        // Re-enable all buttons
+        // Reset the state for the current line
+        selectedSkuState[currentLineKey] = {
+            selectedIndex: null,
+            selectedLabel: null,
+            buttonsDisabled: false
+        };
+
+        // Re-enable all buttons in the UI
+        const buttons = document.querySelectorAll('.sku-button');
         buttons.forEach(btn => {
-            btn.classList.remove('active');  // Remove active state
-            btn.disabled = false;            // Re-enable all
+            btn.classList.remove('active');
+            btn.disabled = false;
         });
-        
+
         // Run the appropriate STOP script based on the current line
         const pythonPath = 'C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe';
-        
+
         // Use different stop script paths based on currentLine
         let stopScriptPath;
         if (currentLine === 'Line 1') {
@@ -632,92 +648,57 @@ async function handleSkuClick(scriptNumber, label) {
             stopScriptPath = 'c:/Users/Rupesh/demoprojects/GUI/main1.py';
             console.log("Line 2 STOP CODE script executed");
         }
-        
+
         await window.electron.runPythonScript(pythonPath, stopScriptPath);
-        
+
         // Send a WebSocket message about stopping if connected
         if (ws && ws.readyState === WebSocket.OPEN) {
             const message = `STOP: ${currentLine}`;
             ws.send(message);
             console.log("Sent over WebSocket:", message);
         }
-        
+
         return;
     }
 
-    // Disable all except STOP CODE
-    buttons.forEach(btn => {
-        if (!btn.classList.contains('stop-code-button')) {
-            btn.classList.remove('active');      // Remove active from all
-            btn.disabled = true;                 // Disable all except STOP
+    // Update the state for the current line
+    selectedSkuState[currentLineKey] = {
+        selectedIndex: buttonIndex,
+        selectedLabel: label,
+        buttonsDisabled: true
+    };
+
+    // Apply UI changes
+    const buttons = document.querySelectorAll('.sku-button');
+    buttons.forEach((btn, index) => {
+        if (btn.classList.contains('stop-code-button')) {
+            btn.disabled = false;
+        } else {
+            btn.classList.remove('active');
+            btn.disabled = true;
         }
     });
-    
-    const clickedButton = document.getElementById(`sku-button-${scriptNumber - 1}`);
+
+    // Highlight the selected button
+    const clickedButton = document.getElementById(`sku-button-${buttonIndex}`);
     if (clickedButton) {
-        clickedButton.classList.add('active');   // Mark clicked one as active
+        clickedButton.classList.add('active');
     }
-    
+
     // Run the SKU Python script
     runPythonScript(scriptNumber);
 }
-
-
 
 function openDashboard() {
     window.open("https://hul.indusvision.ai", "_blank"); // Opens in a new tab
 }
 
-
-
-
-// async function runStartScript() {
-//     const pythonPath = 'C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe';
-//     const scriptPath = 'd:/Electron_Project zip/Electron_Project/main1.py';
-//     const configPath = 'C:/Users/Rupesh/demoprojects/Electron_Project/start_config.json'; // Replace with actual path
-
-//     // Launch script in terminal
-//     await window.electron.runPythonScript(pythonPath, scriptPath);
-
-//     // Overwrite config file
-//     const newConfig = {
-//         mode: "start", // example, use your actual config structure
-//         timestamp: new Date().toISOString()
-//     };
-//     const result = await window.electron.writeConfigFile(configPath, JSON.stringify(newConfig, null, 2));
-//     if (result) {
-//         alert("Start script launched and config updated.");
-//     }
-// }
-
-// async function runStopScript() {
-//     const pythonPath = 'C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe';
-//     const scriptPath = 'c:/Users/Rupesh/Projects/serac1/Electron_Project/main.py';
-//     const configPath = 'C:/Users/Rupesh/demoprojects/Electron_Project/stop_config.json'; // Replace with actual path
-
-//     await window.electron.runPythonScript(pythonPath, scriptPath);
-
-//     const newConfig = {
-//         mode: "stop",
-//         timestamp: new Date().toISOString()
-//     };
-//     const result = await window.electron.writeConfigFile(configPath, JSON.stringify(newConfig, null, 2));
-//     if (result) {
-//         alert("Stop script launched and config updated.");
-//     }
-// }
-
-
-
-
-     
 let currentRunningScript = null; // Store the currently running script
 let currentLine = 'Line 1'; // Default to Line 1
 
 function setCurrentLine(lineName) {
     currentLine = lineName;
 }
-
 
 // Modified runPythonScript function
 async function runPythonScript(scriptNumber) {
@@ -729,7 +710,7 @@ async function runPythonScript(scriptNumber) {
 
         const scriptMap = currentLine === 'Line 2' ? line2Scripts.scripts : line1Scripts.scripts;
         const script = scriptMap[scriptNumber];
-        
+
         if (!script) {
             console.error("Script not found for this SKU");
             return;
@@ -767,14 +748,11 @@ async function runPythonScript(scriptNumber) {
         // Run the main Python script
         console.log("Running with:", script.pythonPath, script.scriptPath);
         await window.electron.runPythonScript(script.pythonPath, script.scriptPath);
-        
+
     } catch (error) {
         console.error("Error running script:", error);
     }
 }
-
-
-
 
 let ws = null;
 
@@ -799,13 +777,7 @@ function initWebSocket() {
     };
 }
 
-
-
-
-
 // Cleanup intervals when changing sections
-
-
 function cleanupIntervals() {
     if (cameraInterval) {
         clearInterval(cameraInterval);
@@ -818,6 +790,7 @@ function cleanupIntervals() {
 }
 
 // Add event listener for page load
+// Event handlers for the authentication popup
 document.addEventListener('DOMContentLoaded', () => {
     // Add event listeners for navigation buttons
     document.querySelectorAll('.nav-button').forEach(button => {
@@ -827,15 +800,14 @@ document.addEventListener('DOMContentLoaded', () => {
             loadContent(section, event);
         });
     });
-    
+
     // Load default content
     loadContent('code');
-    loadContent('defect_toggle');
     loadScriptConfigs();
     initWebSocket();
-   
+    loadContent('defect_toggle');
+    startCameraUpdates();
 });
-
 
 // Add event listeners for buttons to run the correct line script
 document.getElementById('line1-button').addEventListener('click', async () => {

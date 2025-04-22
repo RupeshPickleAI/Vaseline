@@ -207,7 +207,7 @@ ipcMain.on('update-data-collection-toggle-json', (event, updatedData) => {
 });
 
 //this is the skubuttons config file 
-const skuButtonsPath = path.join(__dirname, 'sku_buttons.json');
+const skuButtonsPath = "C:/Users/Rupesh/demoprojects/GUI/assets/allconfigs/sku_buttons.json";
 
 ipcMain.handle('get-sku-buttons', async () => {
     try {
@@ -219,6 +219,7 @@ ipcMain.handle('get-sku-buttons', async () => {
         return {};
     }
 });
+
 
 
 // Add this in main.js
@@ -312,3 +313,5 @@ app.on('activate', () => {
         createWindow();
     }
 });
+const { startTCPServer } = require('./tcpServer');
+startTCPServer(5000);
