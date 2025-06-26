@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login - INDUS VISION</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: Arial, sans-serif;
@@ -41,13 +46,28 @@
             height: auto;
         }
 
-        .form-group { margin-bottom: 20px; }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
         .form-group label {
-            display: block;
+            display: flex;
+            justify-content: flex-start;
+            gap: 5px;
+            align-items: center;
             margin-bottom: 8px;
             color: #2c3e50;
             font-weight: 600;
+            text-align: left;
+        }
+
+        .required {
+            color: red;
+            font-weight: bold;
+        }
+
+        .label-text {
+            flex-shrink: 0;
         }
 
         .input-wrapper {
@@ -97,34 +117,40 @@
 
         .error-message {
             color: #e74c3c;
+            font-weight: 900;
             font-size: 14px;
             margin-top: 5px;
             display: none;
         }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <div class="logo-container">
-            <img src="https://eimkeia.stripocdn.email/content/guids/CABINET_8270216c780e362a1fbcd636b59c67ae376eb446dc5f95e17700b638b8c3f618/images/indus_logo_dev.png" alt="Indus Logo">
+            <img src="https://eimkeia.stripocdn.email/content/guids/CABINET_8270216c780e362a1fbcd636b59c67ae376eb446dc5f95e17700b638b8c3f618/images/indus_logo_dev.png"
+                alt="Indus Logo">
         </div>
         <form id="loginForm">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">
+                    <span class="label-text">Username</span><span class="required">*</span>
+                </label>
                 <div class="input-wrapper">
                     <input type="text" id="username" name="username" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">
+                    <span class="label-text">Password</span><span class="required">*</span>
+                </label>
                 <div class="input-wrapper">
                     <input type="password" id="password" name="password" required>
                     <i class="fas fa-eye-slash password-toggle" id="togglePassword"></i>
                 </div>
-                
             </div>
-            <div class="error-message" id="errorMessage">Invalid username or password</div>
             <button type="submit" class="login-btn">Login</button>
+            <div class="error-message" id="errorMessage">Invalid username or password</div>
         </form>
     </div>
 
@@ -159,4 +185,5 @@
         });
     </script>
 </body>
+
 </html>

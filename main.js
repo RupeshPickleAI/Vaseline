@@ -3,8 +3,8 @@ const { exec,spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-let toggleJsonPath = "C:/Users/Rupesh/Downloads/testing gui/toggle.json";
-const ToggleJsonPathONE = "C:/Users/Rupesh/demoprojects/GUI/togglesONE.json"; // Add this new path
+let toggleJsonPath = "C:/Users/pc/Desktop/CODE_BASE/gui_python_config/Defect_Toggle.json";
+const ToggleJsonPathONE = "C:/Users/pc/Desktop/CODE_BASE/gui_python_config/Data_Collection.json"; // Add this new path
 
 
 let mainWindow;
@@ -28,14 +28,7 @@ function createWindow() {
 
     mainWindow.loadFile('login.html');
     // OPen Developer Tools for debugging
-    mainWindow.webContents.openDevTools();
-
-   // Add keyboard shortcut to toggle DevTools
-   mainWindow.webContents.on('before-input-event', (event, input) => {
-    if (input.key.toLowerCase() === 'f12') {
-        mainWindow.webContents.toggleDevTools();
-    }
-});
+  
 }
 
 ipcMain.handle('authenticate-user', async (event, username, password) => {
@@ -97,7 +90,7 @@ ipcMain.handle('run-config-file', async (event, configPath) => {
 // Function to execute Python scripts
 function runPython(scriptPath, args = []) {
     return new Promise((resolve, reject) => {
-        const pythonPath = '"C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe"';
+        const pythonPath = '"C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe"';
         const command = `${pythonPath} "${scriptPath}" ${args.map(arg => `"${arg}"`).join(' ')}`;
 
         console.log(`Executing command: ${command}`);
@@ -114,10 +107,10 @@ function runPython(scriptPath, args = []) {
     });
 }
 
-// Handler for Line 1 and Line 2
+// Handler for Serac-1 and Line 2
 async function runSkuScript(line, scriptNumber) {
     let script;
-    if (line === 'Line 1') {
+    if (line === 'Serac-1') {
         script = machineScriptLine1[scriptNumber];
     } else if (line === 'Line 2') {
         script = machineScriptLine2[scriptNumber];
@@ -142,7 +135,7 @@ async function runSkuScript(line, scriptNumber) {
     }
 }
 
-// Handler to call when a button is clicked for Line 1 or Line 2
+// Handler to call when a button is clicked for Serac-1 or Line 2
 ipcMain.handle('run-sku-python-script', async (event, line, scriptNumber) => {
     await runSkuScript(line, scriptNumber);
 });
@@ -207,12 +200,12 @@ ipcMain.on('update-data-collection-toggle-json', (event, updatedData) => {
 });
 
 //this is the skubuttons config file 
-const skuButtonsPath = "C:/Users/Rupesh/demoprojects/GUI/assets/allconfigs/sku_buttons.json";
+const skuButtonsPath = "C:/Users/Rupesh/demoprojects/Vaseline/assets/allconfigs/sku_buttons.json";
 
 ipcMain.handle('get-sku-buttons', async () => {
     try {
         const rawData = fs.readFileSync(skuButtonsPath);
-        const parsed = JSON.parse(rawData); // Will return full object with Line 1, Line 2, etc.
+        const parsed = JSON.parse(rawData); // Will return full object with Serac-1, Line 2, etc.
         return parsed;
     } catch (err) {
         console.error("Error loading sku_buttons.json:", err);
@@ -225,8 +218,8 @@ ipcMain.handle('get-sku-buttons', async () => {
 // Add this in main.js
 ipcMain.handle('run-ocr-config', async (event, skuNumber) => {
     return new Promise((resolve, reject) => {
-        const pythonPath = 'C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe';
-        const scriptPath = 'C:/Users/Rupesh/Downloads/testing gui/ocr_configs_line_1.py';
+        const pythonPath = 'C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe';
+        const scriptPath = 'C:/Users/Rupesh/demoprojects/Vaseline/serac_config.py';
         const command = `"${pythonPath}" "${scriptPath}" ${skuNumber}`;
 
         console.log(`Running OCR config script: ${command}`);
@@ -237,7 +230,7 @@ ipcMain.handle('run-ocr-config', async (event, skuNumber) => {
                 reject(`Error: ${stderr || error.message}`);
                 return;
             }
-            console.log(`OCR config updated: ${stdout}`);
+            console.log(`serac config updated: ${stdout}`);
             resolve(true);
         });
     });
@@ -313,5 +306,28 @@ app.on('activate', () => {
         createWindow();
     }
 });
-const { startTCPServer } = require('./tcpServer');
-startTCPServer(5000);
+// const { startTCPServer } = require('./tcpServer');
+// startTCPServer(5000);
+
+const chatbotResponses = [
+    "Hello! How can I help you today?",
+    "I'm here to assist you!",
+    "Did you know? You can ask me anything!",
+    "Processing your request...",
+    "That's interesting! Tell me more.",
+    "I'm just a bot, but I love to chat!",
+    "Let me check that for you.",
+    "Can you please clarify your question?",
+    "Here's a random fact: The Eiffel Tower can be 15 cm taller during hot days!",
+    "I'm always learning new things!"
+];
+
+ipcMain.handle('chatbot-message', async (event, userMessage) => {
+    // Log the user message
+    console.log(`[Chatbox] User: ${userMessage}`);
+    const randomIndex = Math.floor(Math.random() * chatbotResponses.length);
+    const response = chatbotResponses[randomIndex];
+    // Log the bot response
+    console.log(`[Chatbox] Bot: ${response}`);
+    return response;
+});

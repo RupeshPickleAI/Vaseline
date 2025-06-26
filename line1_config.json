@@ -1,24 +1,32 @@
 {
     "scripts": {
         "1": {
-            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
-            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main1.py"
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/Rupesh/demoprojects/Vaseline/main.py"
         },
         "2": {
-            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
-            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/Rupesh/demoprojects/Vaseline/main.py"
         },
         "3": {
-            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
-            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/Rupesh/demoprojects/Vaseline/main.py"
         },
         "4": {
-            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
-            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/Rupesh/demoprojects/Vaseline/main.py"
         },
         "5": {
-            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
-            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/Rupesh/demoprojects/Vaseline/main.py"
+        },
+        "6": {
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/Rupesh/demoprojects/Vaseline/main.py"
+        },
+        "7": {
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/Rupesh/demoprojects/Vaseline/main.py"
         }
     }
 }

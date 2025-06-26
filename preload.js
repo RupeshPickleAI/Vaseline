@@ -21,7 +21,7 @@
     updateDataCollectionToggleJson: (data) => ipcRenderer.send('update-data-collection-toggle-json', data),
     onDataCollectionToggleJsonUpdated: (callback) => ipcRenderer.on('data-collection-toggle-json-updated', (event, result) => callback(result)),
         
-    
+        chatbotMessage: (userMessage) => ipcRenderer.invoke('chatbot-message', userMessage),
 
         // ⚠️ REMOVED: sendSocketMessage
         // WebSocket will now be handled entirely in the frontend (script.js) using WebSocket API

@@ -11,9 +11,12 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+
+
 /* Sidebar Styling  */ 
 .sidebar {
     width: 290px;
+    max-width: 100vw;
     background: linear-gradient(180deg, #2c3e50 0%, #3498db 100%);
     padding: 30px 20px;
     color: white;
@@ -55,7 +58,7 @@ body {
 }
 
 .nav-button {
-    width: 100%;
+    width: 106%;
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -85,7 +88,7 @@ body {
 }
 
 .nav-button.active {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     color: #2c3e50;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -187,7 +190,7 @@ body {
 }
 
 .camera-header h1 {
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
     color: white;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -252,7 +255,7 @@ body {
 
 .machine-status-header h1 {
     color: white;
-    font-size: 2.5rem;
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
     margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -564,25 +567,31 @@ body {
 
 /* Toggle Container */
 .toggle-container {
+    width: 100%;
+    max-width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centering items */
-    gap: 20px; /* Adds spacing between toggles */
+    justify-content: center;
+    gap: 20px;
     padding: 20px;
+    box-sizing: border-box;
 }
 /* Toggle Wrapper - Space between Label and Switch */
 .toggle-wrapper {
+    width: 100%;
+    max-width: 900px;
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 350px;
     background: white;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     position: relative;
-    gap: 15px; /* Space between elements */
+    gap: 15px;
+    box-sizing: border-box;
 }
 /* Toggle Switch */
 .switch {
@@ -644,9 +653,16 @@ input:checked + .slider:before {
 } 
 
 .toggle-label {
+    flex: 1 1 0;
+    min-width: 0;
     font-size: 18px;
     font-weight: 600;
     color: #2c3e50;
+    word-break: break-word;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 10px;
 }
 
 /* Active Label */
@@ -747,7 +763,7 @@ input:checked ~ .active-label {
 .comfort-header h1 {
     color: #2c3e50;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
     font-weight: 600;
 }
 
@@ -942,11 +958,13 @@ input:checked ~ .active-label {
 
 .auth-container {
     position: relative;
-    width: 400px;
+    width: 90vw;
+    max-width: 400px;
+    min-width: 0;
     background: linear-gradient(135deg, #2980b9, #3498db, #2c3e50);
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    padding: 30px;
+    padding: 5vw 3vw;
     color: white;
     animation: slideIn 0.3s ease-out;
 }
@@ -1000,6 +1018,24 @@ input:checked ~ .active-label {
 .auth-form .form-group {
     margin-bottom: 22px;
     position: relative;
+}
+
+.auth-form .form-group label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 4px;
+    gap: 4px;
+}
+
+.label-text {
+    flex: none;
+}
+
+.required {
+    color: red;
+    font-weight: bold;
 }
 
 .auth-form label {
@@ -1089,7 +1125,7 @@ input:checked ~ .active-label {
 
 .auth-error {
     color: #ff7675;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bolder;
     margin-top: 15px;
     text-align: center;
@@ -1150,4 +1186,276 @@ input:checked ~ .active-label {
 
 .password-toggle:hover {
     color: #ffffff;
+}
+
+/* --- Responsive Improvements Start --- */
+/* 1. Sidebar and Main Layout */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 220px;
+        padding: 20px 10px;
+    }
+}
+@media (max-width: 600px) {
+    .sidebar {
+        width: 100vw;
+        min-width: 0;
+        padding: 0 4px;
+        box-shadow: none;
+    }
+}
+
+/* 2. Auth Container Responsive */
+@media (max-width: 400px) {
+    .auth-container {
+        width: 98vw;
+        padding: 2vw 1vw;
+    }
+}
+
+/* 3. Toggle Wrapper Responsive */
+@media (max-width: 600px) {
+    .toggle-wrapper {
+        max-width: 98vw;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px;
+    }
+}
+
+/* 4. Font Scaling for Headings */
+.camera-header h1,
+.section-title,
+.machine-status-header h1,
+.comfort-header h1 {
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
+}
+
+/* 5. Reduce Padding/Margins on Small Screens */
+@media (max-width: 600px) {
+    .main-content,
+    .content-section,
+    .camera-header,
+    .section-header,
+    .machine-status-header {
+        padding: 8px !important;
+        margin-bottom: 10px !important;
+    }
+    .camera-grid,
+    .status-list,
+    .buttons-grid,
+    .sku-buttons-grid,
+    .comfort-buttons-grid {
+        padding: 6px !important;
+        gap: 8px !important;
+    }
+}
+
+/* 6. Grids/Flex Wrapping for Small Devices */
+@media (max-width: 600px) {
+    .camera-grid,
+    .status-list,
+    .buttons-grid,
+    .sku-buttons-grid,
+    .comfort-buttons-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .button-group {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+}
+
+/* 7. Modal/Dialog Responsive */
+.auth-overlay {
+    align-items: flex-start;
+    padding-top: 10vw;
+}
+
+/* 8. Horizontal Scroll for Wide Content */
+@media (max-width: 600px) {
+    .camera-feed img,
+    .status-list,
+    .sku-buttons-grid,
+    .comfort-buttons-grid {
+        overflow-x: auto;
+        display: block;
+    }
+}
+
+/* 9. Extra Small Devices (375px and below) */
+@media (max-width: 375px) {
+    .sidebar,
+    .auth-container,
+    .toggle-wrapper {
+        padding: 2px !important;
+    }
+    .camera-header h1,
+    .section-title,
+    .machine-status-header h1,
+    .comfort-header h1 {
+        font-size: 1rem !important;
+    }
+}
+/* --- Responsive Improvements End --- */
+
+/* --- Toggle Section Responsive Improvements --- */
+@media (max-width: 1000px) {
+    .toggle-wrapper {
+        max-width: 98vw;
+    }
+}
+@media (max-width: 600px) {
+    .toggle-container {
+        padding: 8px;
+        gap: 10px;
+        overflow-x: auto;
+    }
+    .toggle-wrapper {
+        max-width: 100vw;
+        padding: 10px 4px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .toggle-label {
+        font-size: 16px;
+        padding-right: 0;
+    }
+}
+/* --- End Toggle Section Responsive Improvements --- */
+
+/* Chatbox Styles */
+.chatbox-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 340px;
+    max-width: 90vw;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18), 0 1.5px 6px rgba(52, 152, 219, 0.12);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    border: 2px solid #3498db;
+    animation: slideIn 0.5s;
+}
+
+.chatbox-header {
+    background: linear-gradient(90deg, #3498db 60%, #2c3e50 100%);
+    color: #fff;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #eaf0fa;
+    letter-spacing: 1px;
+}
+
+.chatbox-messages {
+    flex: 1;
+    padding: 16px;
+    background: #f8f9fa;
+    overflow-y: auto;
+    max-height: 260px;
+    min-height: 120px;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chatbox-message {
+    padding: 10px 14px;
+    border-radius: 14px;
+    margin-bottom: 4px;
+    max-width: 80%;
+    word-break: break-word;
+    box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.chatbox-message.user {
+    background: #3498db;
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.chatbox-message.bot {
+    background: #eaf6fb;
+    color: #2c3e50;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.chatbox-input-area {
+    display: flex;
+    border-top: 1px solid #eaf0fa;
+    background: #fff;
+    padding: 10px 12px;
+    align-items: center;
+    gap: 8px;
+}
+
+#chatboxInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #f0f4fa;
+    font-size: 1rem;
+    color: #2c3e50;
+    transition: box-shadow 0.2s;
+}
+
+#chatboxInput:focus {
+    box-shadow: 0 0 0 2px #3498db33;
+}
+
+#chatboxSend {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#chatboxSend:hover {
+    background: #217dbb;
+}
+
+@media (max-width: 600px) {
+    .chatbox-container {
+        right: 10px;
+        bottom: 10px;
+        width: 98vw;
+        max-width: 98vw;
+    }
+    .chatbox-header {
+        font-size: 1rem;
+        padding: 10px 10px;
+    }
+    .chatbox-messages {
+        padding: 8px;
+        max-height: 120px;
+        min-height: 60px;
+    }
+    .chatbox-input-area {
+        padding: 6px 6px;
+    }
 }

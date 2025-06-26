@@ -11,7 +11,7 @@ let lastSection = 'code';
 
 // New state variables to track SKU selection
 let selectedSkuState = {
-    'Line 1': {
+    'Serac-1': {
         selectedIndex: null,
         selectedLabel: null,
         buttonsDisabled: false
@@ -26,11 +26,11 @@ let selectedSkuState = {
 // Function to load script configurations
 async function loadScriptConfigs() {
     try {
-        const line1Response = await fetch('C:/Users/Rupesh/demoprojects/GUI/line1_config.json');
-        const line2Response = await fetch('C:/Users/Rupesh/demoprojects/GUI/line2_config.json');
+        const line1Response = await fetch('C:/Users/Rupesh/demoprojects/Vaseline/line1_config.json');
+        // const line2Response = await fetch('C:/Users/pc/Desktop/CODE_BASE/gui_python_config/Line_2_Script_Path.json');
 
         line1Scripts = await line1Response.json();
-        line2Scripts = await line2Response.json();
+        // line2Scripts = await line2Response.json();
 
         console.log('Script configurations loaded successfully');
     } catch (error) {
@@ -88,67 +88,38 @@ function loadContent(section, event) {
                     <h1 class="section-title">Machine Control Panel</h1>
                 </div>
                 <div class="buttons-grid">
-                   <button class="run-button" onclick="loadSkuButtons('Line 1')">
+                   <button class="run-button" onclick="loadSkuButtons('Serac-1')">
                         <div class="button-logo">
                             <img src="https://eimkeia.stripocdn.email/content/guids/CABINET_8270216c780e362a1fbcd636b59c67ae376eb446dc5f95e17700b638b8c3f618/images/unileverremovebgpreview.png">
                         </div>
-                        LINE 1
+                        Serac-1
                     </button>
-                    <button class="run-button" onclick="loadSkuButtons('Line 2')">
-                        <div class="button-logo">
-                            <img src="https://eimkeia.stripocdn.email/content/guids/CABINET_8270216c780e362a1fbcd636b59c67ae376eb446dc5f95e17700b638b8c3f618/images/unileverremovebgpreview.png">
-                        </div>
-                        LINE 2
-                    </button>
+                  
                         
                 </div>
             </div>`;
     }
 
 
-    else if (section === 'camera') {
-        const mainContent = document.getElementById('mainContent');
+     else if (section === 'camera') {
+        // Initial setup of the camera section container
         mainContent.innerHTML = `
             <div id="camera-section" class="content-section active">
                 <div class="camera-header">
                     <h1><i class="fas fa-video"></i> Live Camera Feed</h1>
                     <p>Real-time surveillance monitoring system for all production units.</p>
                 </div>
-                <div class="camera-grid">
-                    <div class="camera-container">
-                        <div class="camera-title"><i class="fas fa-video"></i> Line1 Before Filling</div>
-                        <div class="camera-feed">
-                            <img src="" alt="Camera 1" id="camera1">
-                        </div>
-                    </div>
-                    <div class="camera-container">
-                        <div class="camera-title"><i class="fas fa-video"></i> Line1 OCR</div>
-                        <div class="camera-feed">
-                            <img src="" alt="Camera 2" id="camera2">
-                        </div>
-                    </div>
-                    <div class="camera-container">
-                        <div class="camera-title"><i class="fas fa-video"></i> Line1 After Filling</div>
-                        <div class="camera-feed">
-                            <img src="" alt="Camera 3" id="camera3">
-                        </div>
-                    </div>
-                    <div class="camera-container">
-                        <div class="camera-title"><i class="fas fa-video"></i> cam4</div>
-                        <div class="camera-feed">
-                            <img src="" alt="Camera 4" id="camera4">
-                        </div>
-                    </div>
-                    <div class="camera-container">
-                        <div class="camera-title"><i class="fas fa-video"></i> Camera 5</div>
-                        <div class="camera-feed">
-                            <img src="" alt="Camera 5" id="camera5">
-                        </div>
-                    </div>
+                <div class="camera-grid" id="dynamicCameraGrid">
+                    <!-- Dynamic camera content will be loaded here -->
+                    <div class="loading-message">Loading cameras...</div>
                 </div>
             </div>`;
-        startCameraUpdates();
+        
+        // Load cameras dynamically from the config file
+        loadCamerasFromConfig();
+  
     }
+
 
     else if (section === 'data_collection') {
         mainContent.innerHTML = `
@@ -168,7 +139,7 @@ function loadContent(section, event) {
 
 //user authentication for the defect toggles and the data collection 
 
-const userConfigPath = "C:/Users/Rupesh/demoprojects/GUI/user_config.json";
+const userConfigPath = "C:/Users/Rupesh/Projects/Vaseline/user_config.json";
 let authenticatedSections = {
     'images': false,
     'data_collection': false
@@ -195,18 +166,22 @@ function showAuthenticationDialog(section, event) {
         </div>
         <div class="auth-form">
             <div class="form-group">
-                <label for="username">Username</label>
-                <i class="fas fa-user input-icon"></i>
-                <input type="text" id="username" placeholder="Enter your username">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <i class="fas fa-lock input-icon"></i>
-                <div class="password-container">
-                    <input type="password" id="password" placeholder="Enter your password">
-                    <i class="fas fa-eye-slash password-toggle" id="togglePassword"></i>
-                </div>
-            </div>
+    <label for="username">
+        <span class="label-text">Username</span> <span class="required">*</span>
+    </label>
+    <i class="fas fa-user input-icon"></i>
+    <input type="text" id="username" placeholder="Enter your username">
+</div>
+<div class="form-group">
+    <label for="password">
+        <span class="label-text">Password</span> <span class="required">*</span>
+    </label>
+    <i class="fas fa-lock input-icon"></i>
+    <div class="password-container">
+        <input type="password" id="password" placeholder="Enter your password">
+        <i class="fas fa-eye-slash password-toggle" id="togglePassword"></i>
+    </div>
+</div>
             <div class="auth-buttons">
               
                 <button class="auth-button login-button" id="login-button" onclick="authenticateUser('${section}')">
@@ -361,8 +336,8 @@ function cancelAuthentication() {
 }
 
 
-const toggleJsonPath = "C:/Users/Rupesh/Downloads/testing gui/toggle.json"; // Define the correct path
-const ToggleJsonPathONE = "C:/Users/Rupesh/demoprojects/GUI/togglesONE.json"; // Add this new path
+const toggleJsonPath = "C:/Users/Rupesh/demoprojects/Vaseline/assets/allconfigs/toggle.json"; // Define the correct path defect toggles
+const ToggleJsonPathONE = "C:/Users/pc/Desktop/CODE_BASE/gui_python_config/Data_Collection.json"; // Add this new path for data collection
 
 // Object to store updated toggle states before submitting
 let updatedToggles = {};
@@ -509,29 +484,86 @@ async function submitDataCollectionToggles() {
     }
 }
 
-const cameraJsonPath = "C:/Users/Rupesh/demoprojects/GUI/assets/allconfigs/camera.json" //path for the camera 
+const cameraJsonPath = "C:/Users/pc/Desktop/CODE_BASE/gui_python_config/camera_all_line_feed.json" //path for the camera 
 
 // Function to update the camera images
-function updateCameras() {
-    // Fetch camera config (camera.json) to get the base64 image data
+
+// Function to dynamically load cameras from the config file
+function loadCamerasFromConfig() {
     fetch(`file:///${cameraJsonPath}`)
         .then(response => response.json())
         .then(data => {
-            const cameras = data.cameraImage; // Assuming cameraImage contains the camera data
+            const cameraGrid = document.getElementById('dynamicCameraGrid');
+            if (!cameraGrid) return;
+
+            cameraGrid.innerHTML = '';
+
+            const cameras = data.cameraImage;
+            if (!cameras || Object.keys(cameras).length === 0) {
+                cameraGrid.innerHTML = '<div class="no-cameras">No cameras configured in camera.json</div>';
+                return;
+            }
+
+            Object.keys(cameras).forEach(cameraKey => {
+                const cameraTitle = cameraKey.charAt(0).toUpperCase() + cameraKey.slice(1); // Capitalize title
+
+                const cameraElement = document.createElement('div');
+                cameraElement.className = 'camera-container';
+                cameraElement.innerHTML = `
+                    <div class="camera-title"><i class="fas fa-video"></i> ${cameraTitle}</div>
+                    <div class="camera-feed">
+                        <img src="" alt="${cameraTitle}" id="${cameraKey}">
+                    </div>
+                `;
+                cameraGrid.appendChild(cameraElement);
+            });
+
+            startCameraUpdates();
+        })
+        .catch(error => {
+            console.error("Error loading camera configuration:", error);
+            const cameraGrid = document.getElementById('dynamicCameraGrid');
+            if (cameraGrid) {
+                cameraGrid.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Failed to load camera configuration. Check console for details.
+                    </div>
+                `;
+            }
+        });
+}
+// Function to update the camera images
+// Updated camera update function to handle dynamic cameras
+function updateCameras() {
+    fetch(`file:///${cameraJsonPath}`)
+        .then(response => response.json())
+        .then(data => {
+            const cameras = data.cameraImage;
             if (!cameras) {
                 console.error("Invalid camera image data format.");
                 return;
             }
 
-            // Iterate over each camera and update the image
-            Object.entries(cameras).forEach(([cameraKey, base64Image]) => {
-                const imgElement = document.getElementById(cameraKey); // Get the image element
+            // Detect if camera config has changed (added/removed cameras)
+            const currentCameras = document.querySelectorAll('.camera-container');
+            if (currentCameras.length !== Object.keys(cameras).length) {
+                // Config has changed, reinitialize the cameras
+                console.log("Camera configuration changed. Reinitializing...");
+                initializeCameras();
+                return;
+            }
+
+            // Update existing camera feeds
+            Object.entries(cameras).forEach(([cameraId, base64Image]) => {
+                const imgElement = document.getElementById(cameraId);
                 if (imgElement) {
-                    console.log(`Updating image for ${cameraKey}`);
-                    // Directly update image source without any caching mechanism
+                    // Update image with cache-busting
                     imgElement.src = `data:image/jpeg;base64,${base64Image}`;
                 } else {
-                    console.error(`Image element for ${cameraKey} not found.`);
+                    // If we find a camera in the config that's not in the DOM, reinitialize
+                    console.log(`Camera ${cameraId} not found in DOM. Reinitializing cameras...`);
+                    initializeCameras();
                 }
             });
         })
@@ -552,6 +584,8 @@ function stopCameraUpdates() {
         cameraInterval = null;
     }
 }
+
+
 
 async function openComfortPage() {
     const skuList = await window.electron.getSkuButtons();
@@ -637,13 +671,13 @@ async function handleSkuClick(scriptNumber, label) {
         });
 
         // Run the appropriate STOP script based on the current line
-        const pythonPath = 'C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe';
+        const pythonPath = 'C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe';
 
         // Use different stop script paths based on currentLine
         let stopScriptPath;
-        if (currentLine === 'Line 1') {
-            stopScriptPath = 'C:/Users/Rupesh/demoprojects/GUI/main.py';
-            console.log("Line 1 STOP CODE script executed");
+        if (currentLine === 'Serac-1') {
+            stopScriptPath = 'C:/Users/pc/Desktop/CODE_BASE/vasline_latest_codes/vasline_stop_codes.py';
+            console.log("Serac-1 STOP CODE script executed");
         } else if (currentLine === 'Line 2') {
             stopScriptPath = 'c:/Users/Rupesh/demoprojects/GUI/main1.py';
             console.log("Line 2 STOP CODE script executed");
@@ -694,7 +728,7 @@ function openDashboard() {
 }
 
 let currentRunningScript = null; // Store the currently running script
-let currentLine = 'Line 1'; // Default to Line 1
+let currentLine = 'Serac-1'; // Default to Serac-1
 
 function setCurrentLine(lineName) {
     currentLine = lineName;
@@ -728,18 +762,17 @@ async function runPythonScript(scriptNumber) {
         }
 
         // Run line-specific configs
-        if (currentLine === 'Line 1') {
+        if (currentLine === 'Serac-1') {
             const ocrUpdated = await window.electron.runOcrConfig(scriptNumber);
             if (!ocrUpdated) {
-                console.error("Line 1 config update failed.");
+                console.error("Serac-1 config update failed.");
                 return;
             }
         } else if (currentLine === 'Line 2') {
-            const backCam = await window.electron.runBackCamConfig(scriptNumber);
-            const frontCam = await window.electron.runFrontCamConfig(scriptNumber);
-            const cldCam = await window.electron.runCldCamConfig(scriptNumber);
+            const ocrUpdated = await window.electron.runOcrConfig(scriptNumber);
+            
 
-            if (!backCam || !frontCam || !cldCam) {
+            if (!ocrUpdated) {
                 console.error("Line 2 config update failed.");
                 return;
             }
@@ -777,6 +810,7 @@ function initWebSocket() {
     };
 }
 
+
 // Cleanup intervals when changing sections
 function cleanupIntervals() {
     if (cameraInterval) {
@@ -788,6 +822,7 @@ function cleanupIntervals() {
         statusInterval = null;
     }
 }
+
 
 // Add event listener for page load
 // Event handlers for the authentication popup
@@ -807,12 +842,14 @@ document.addEventListener('DOMContentLoaded', () => {
     initWebSocket();
     loadContent('defect_toggle');
     startCameraUpdates();
+    // Initialize chatbox
+    initChatbox();
 });
 
 // Add event listeners for buttons to run the correct line script
 document.getElementById('line1-button').addEventListener('click', async () => {
     const scriptNumber = 1; // You can change this dynamically
-    await window.electron.runSkuPythonScript('Line 1', scriptNumber);
+    await window.electron.runSkuPythonScript('Serac-1', scriptNumber);
 });
 
 document.getElementById('line2-button').addEventListener('click', async () => {
@@ -822,4 +859,40 @@ document.getElementById('line2-button').addEventListener('click', async () => {
 
 function logout() {
     window.electron.logoutUser(); // Call the function to return to login page
+}
+
+// --- Chatbox Logic ---
+function initChatbox() {
+    const chatboxContainer = document.getElementById('chatboxContainer');
+    const chatboxMessages = document.getElementById('chatboxMessages');
+    const chatboxInput = document.getElementById('chatboxInput');
+    const chatboxSend = document.getElementById('chatboxSend');
+
+    // Helper to add a message
+    function addMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chatbox-message ' + sender;
+        msgDiv.textContent = text;
+        chatboxMessages.appendChild(msgDiv);
+        chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+    }
+
+    // Send message to backend via IPC
+    async function sendMessage() {
+        const text = chatboxInput.value.trim();
+        if (!text) return;
+        addMessage(text, 'user');
+        chatboxInput.value = '';
+        try {
+            const response = await window.electron.chatbotMessage(text);
+            addMessage(response, 'bot');
+        } catch (err) {
+            addMessage('Connection error. Please try again later.', 'bot');
+        }
+    }
+
+    chatboxSend.onclick = sendMessage;
+    chatboxInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') sendMessage();
+    });
 }

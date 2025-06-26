@@ -1,6 +1,0 @@
-{
-    "camera_config": "path/to/config",
-    "default_confidence": 0.55,
-    "product_id": 2,
-    "cld_count": 16
-}

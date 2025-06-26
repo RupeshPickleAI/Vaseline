@@ -1,0 +1,52 @@
+{
+    "Back_Camera": {
+        "Back_Camera_Config_Path": "C:/Users/pc/Desktop/Indus-vision-Code-base/Camera_Config/Back_Camera_updated.Config",
+        "Back_Camera_Model_Weights": "C:/Users/pc/Desktop/Indus-vision-Code-base/Model_Weights/Back_Camera_Weights.pt",
+        "Back_Camera_Serial_Number": "054092523090",
+        "Back_Camera_Incount_Tag": "DENT_BOTTLE_TRIGGER_1",
+        "Back_Camera_Rejection_Tag": "CAMERA_TRIGGER_3",
+        "Back_Camera_Output_Dir": "C:/Users/pc/Desktop/Indus-vision-Code-base/Defect_Images_Folder/Back_Camera_Defects"
+    },
+    "CLD_camera": {
+        "CLD_Camera_Config_Path": "",
+        "CLD_Camera_Model_Weights": "C:/Users/pc/Desktop/Indus-vision-Code-base/Model_Weights/CLD_Camera_Weights.pt",
+        "CLD_Camera_Serial_Number": "054003520048",
+        "CLD_Camera_Incount_Tag": "",
+        "CLD_Camera_Rejection_Tag": "",
+        "CLD_Camera_Output_Dir": ""
+    },
+    "OCR_Camera": {
+        "OCR_Camera_Config_Path": "dheouahdhowuadhowhhowofc",
+        "OCR_Camera_Model_Weights": "deohdewdohdo",
+        "OCR_Camera_Serial_Number": "fhffwuboooobu",
+        "OCR_Camera_Incount_Tag": "ouou8ghiugvi,uyyv",
+        "OCR_Camera_Rejection_Tag": "ohdqbuebudebbd",
+        "OCR_Camera_Output_Dir": "bbbjbj",
+        "OCR_Camera_Default_Conf": "bihhbbh",
+        "OCR_Camera_Iou_Thresh": "deed",
+        "OCR_Camera_Ocr_Count": "ededede"
+    },
+    "Front_Camera": {
+        "Front_Camera_Config_Path": "dcfvgjbh",
+        "Front_Camera_Model_Weights": "asdfghjk",
+        "Front_Camera_Serial_Number": "lkjhgfd",
+        "Front_Camera_Incount_Tag": "rtyui",
+        "Front_Camera_Rejection_Tag": "mnbvcx",
+        "Front_Camera_Output_Dir": "hgyfcvbhuygfcvb"
+    },
+    "Sleeve_Camera": {
+        "Sleeve_Camera_Config_Path": "sdfghj",
+        "Sleeve_Camera_Model_Weights": "xdcvbn",
+        "Sleeve_Camera_Serial_Number": "cvbn",
+        "Sleeve_Camera_Incount_Tag": "sdcfvgbhn",
+        "Sleeve_Camera_Rejection_Tag": "sdfvgbhn",
+        "Sleeve_Camera_Output_Dir": ""
+    },
+    "back_camera_image_write_path": "C:/Users/pc/Desktop/Indus-vision-Code-base/Serac1_Config/b64_image_feed.json",
+    "dashboard_url": "http://localhost:8000/api/dashboard/",
+    "machine_id": 5,
+    "department": 2,
+    "dashboard_urll": "http://localhost:8000/api/dashboard/",
+    "machine_idd": 5,
+    "departmentt": 2
+}
