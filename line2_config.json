@@ -1,20 +1,28 @@
 {
     "scripts": {
         "1": {
-            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
-            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/pc/Desktop/CODE_BASE/vasline_latest_codes/line_2_vaseline_spawn_process.py"
         },
         "2": {
-            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
-            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/pc/Desktop/CODE_BASE/vasline_latest_codes/line_2_vaseline_spawn_process.py"
         },
         "3": {
-            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
-            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/pc/Desktop/CODE_BASE/vasline_latest_codes/line_2_vaseline_spawn_process.py"
         },
         "4": {
-            "pythonPath": "C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe",
-            "scriptPath": "c:/Users/Rupesh/demoprojects/GUI/main.py"
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/pc/Desktop/CODE_BASE/vasline_latest_codes/line_2_vaseline_spawn_process.py"
+        },
+        "5": {
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/pc/Desktop/CODE_BASE/vasline_latest_codes/line_2_vaseline_spawn_process.py"
+        },
+        "6": {
+            "pythonPath": "C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe",
+            "scriptPath": "C:/Users/pc/Desktop/CODE_BASE/vasline_latest_codes/line_2_vaseline_spawn_process.py"
         }
     }
 }

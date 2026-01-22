@@ -3,8 +3,8 @@ const { exec,spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-let toggleJsonPath = "C:/Users/Rupesh/Downloads/testing gui/toggle.json";
-const ToggleJsonPathONE = "C:/Users/Rupesh/demoprojects/GUI/togglesONE.json"; // Add this new path
+let toggleJsonPath = "C:/Users/Rupesh/dummypythonfiles/Defect_Toggle.json";
+const ToggleJsonPathONE = "C:/Users/Rupesh/dummypythonfiles/Data_Collection.json"; // Add this new path
 
 
 let mainWindow;
@@ -28,14 +28,7 @@ function createWindow() {
 
     mainWindow.loadFile('login.html');
     // OPen Developer Tools for debugging
-    mainWindow.webContents.openDevTools();
-
-   // Add keyboard shortcut to toggle DevTools
-   mainWindow.webContents.on('before-input-event', (event, input) => {
-    if (input.key.toLowerCase() === 'f12') {
-        mainWindow.webContents.toggleDevTools();
-    }
-});
+  
 }
 
 ipcMain.handle('authenticate-user', async (event, username, password) => {
@@ -95,9 +88,9 @@ ipcMain.handle('run-config-file', async (event, configPath) => {
 });
 
 // Function to execute Python scripts
-function runPython(scriptPath, args = []) {
+function runPython(scriptPath, args = []) { 
     return new Promise((resolve, reject) => {
-        const pythonPath = '"C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe"';
+        const pythonPath = '"C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe"';
         const command = `${pythonPath} "${scriptPath}" ${args.map(arg => `"${arg}"`).join(' ')}`;
 
         console.log(`Executing command: ${command}`);
@@ -207,7 +200,7 @@ ipcMain.on('update-data-collection-toggle-json', (event, updatedData) => {
 });
 
 //this is the skubuttons config file 
-const skuButtonsPath = "C:/Users/Rupesh/demoprojects/GUI/assets/allconfigs/sku_buttons.json";
+const skuButtonsPath = "C:\\Users\\Rupesh\\dummypythonfiles\\Line_1_2_Buttons.json";
 
 ipcMain.handle('get-sku-buttons', async () => {
     try {
@@ -225,8 +218,8 @@ ipcMain.handle('get-sku-buttons', async () => {
 // Add this in main.js
 ipcMain.handle('run-ocr-config', async (event, skuNumber) => {
     return new Promise((resolve, reject) => {
-        const pythonPath = 'C:/Users/Rupesh/AppData/Local/Programs/Python/Python313/python.exe';
-        const scriptPath = 'C:/Users/Rupesh/Downloads/testing gui/ocr_configs_line_1.py';
+        const pythonPath = 'C:/Users/Rupesh/AppData/Local/Microsoft/WindowsApps/python3.13.exe';
+        const scriptPath = 'C:/Users/Rupesh/dummypythonfiles/ocr_configs_line_1.py';
         const command = `"${pythonPath}" "${scriptPath}" ${skuNumber}`;
 
         console.log(`Running OCR config script: ${command}`);
@@ -244,10 +237,10 @@ ipcMain.handle('run-ocr-config', async (event, skuNumber) => {
 });
 
 
-// ipcMain.handle('run-back-cam-config', async (event, sku) => {
-//     const result = await runPython('C:/Users/Rupesh/demoprojects/GUI/update_back_cam_config.py', [sku]);
-//     return result;
-// });
+ipcMain.handle('run-ocr-config_line_2', async (event, sku) => {
+    const result = await runPython('C:/Users/Rupesh/dummypythonfiles/ocr_configs_line_2.py', [sku]);
+    return result;
+});
 
 // ipcMain.handle('run-front-cam-config', async (event, sku) => {
 //     const result = await runPython('C:/Users/Rupesh/demoprojects/GUI/update_front_cam_config.py', [sku]);
@@ -313,5 +306,5 @@ app.on('activate', () => {
         createWindow();
     }
 });
-const { startTCPServer } = require('./tcpServer');
-startTCPServer(5000);
+// const { startTCPServer } = require('./tcpServer');
+// startTCPServer(5000);

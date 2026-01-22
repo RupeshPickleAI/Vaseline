@@ -1,0 +1,60 @@
+[2025-09-08 12:52:38] [root                            ] [INFO   ] [25132] [14120] [camera.py             ] [58  ] [0: AFTER_FILL-2 NET-1000M-192.168.21.5]
+[2025-09-08 12:52:38] [root                            ] [INFO   ] [25132] [14120] [camera.py             ] [58  ] [1: Before_FILL L2 NET-1000M-192.168.21.6]
+[2025-09-08 12:52:38] [root                            ] [INFO   ] [25132] [14120] [camera.py             ] [58  ] [2: Before_filling L NET-1000M-192.168.21.3]
+[2025-09-08 12:52:38] [root                            ] [INFO   ] [25132] [14120] [camera.py             ] [58  ] [3: CAM2_FOREIGN MATERIAL_FJ NET-1000M-192.168.21.2]
+[2025-09-08 12:52:38] [root                            ] [INFO   ] [25132] [14120] [camera.py             ] [58  ] [4: L1_OCR_CAM NET-1000M-192.168.21.223]
+[2025-09-08 12:52:38] [root                            ] [INFO   ] [25132] [14120] [camera.py             ] [58  ] [5: Line -2 code_cam NET-1000M-192.168.21.4]
+[2025-09-08 12:52:38] [root                            ] [INFO   ] [25132] [14120] [camera.py             ] [69  ] [acProductSeries:GiGeCamera
+acProductName:HT-GEF401GC
+acFriendlyName:Line -2 code_cam
+acLinkName:6402-DC.A5.01.4C.BD.3C
+acDriverVersion:1.5.2.57
+acSensorType:CMOS 4.0M
+acPortType:NET-1000M-192.168.21.4
+acSn:054121020057
+uInstance:255]
+support SSE4.1
+[2025-09-08 12:52:38] [root                            ] [ERROR  ] [25132] [14120] [camera.py             ] [75  ] [CameraInit Failed(32774): No access,Camera has been opened by other programs]
+[2025-09-08 12:52:38] [snap7.client                    ] [INFO   ] [25132] [14120] [client.py             ] [78  ] [creating snap7 client]
+[2025-09-08 12:52:38] [snap7.client                    ] [INFO   ] [25132] [14120] [client.py             ] [194 ] [connecting to 192.168.21.10:102 rack 0 slot 1]
+[2025-09-08 12:52:38] [snap7.client                    ] [DEBUG  ] [25132] [14120] [client.py             ] [842 ] [setting param number 2 to 102]
+[2025-09-08 12:52:38] [root                            ] [INFO   ] [25132] [14120] [plc.py                ] [50  ] [Connected to PLC at 192.168.21.10]
+[2025-09-08 17:50:21] [root                            ] [INFO   ] [16472] [26172] [camera.py             ] [58  ] [0: AFTER_FILL-2 NET-1000M-192.168.21.5]
+[2025-09-08 17:50:21] [root                            ] [INFO   ] [16472] [26172] [camera.py             ] [58  ] [1: Before_FILL L2 NET-1000M-192.168.21.6]
+[2025-09-08 17:50:21] [root                            ] [INFO   ] [16472] [26172] [camera.py             ] [58  ] [2: Before_filling L NET-1000M-192.168.21.3]
+[2025-09-08 17:50:21] [root                            ] [INFO   ] [16472] [26172] [camera.py             ] [58  ] [3: CAM2_FOREIGN MATERIAL_FJ NET-1000M-192.168.21.2]
+[2025-09-08 17:50:21] [root                            ] [INFO   ] [16472] [26172] [camera.py             ] [58  ] [4: L1_OCR_CAM NET-1000M-192.168.21.223]
+[2025-09-08 17:50:21] [root                            ] [INFO   ] [16472] [26172] [camera.py             ] [58  ] [5: Line -2 code_cam NET-1000M-192.168.21.4]
+[2025-09-08 17:50:21] [root                            ] [INFO   ] [16472] [26172] [camera.py             ] [69  ] [acProductSeries:GiGeCamera
+acProductName:HT-GEF401GC
+acFriendlyName:Line -2 code_cam
+acLinkName:6402-DC.A5.01.4C.BD.3C
+acDriverVersion:1.5.2.57
+acSensorType:CMOS 4.0M
+acPortType:NET-1000M-192.168.21.4
+acSn:054121020057
+uInstance:1]
+[2025-09-08 17:50:22] [snap7.client                    ] [INFO   ] [16472] [26172] [client.py             ] [78  ] [creating snap7 client]
+[2025-09-08 17:50:22] [snap7.client                    ] [INFO   ] [16472] [26172] [client.py             ] [194 ] [connecting to 192.168.21.10:102 rack 0 slot 1]
+[2025-09-08 17:50:22] [snap7.client                    ] [DEBUG  ] [16472] [26172] [client.py             ] [842 ] [setting param number 2 to 102]
+[2025-09-08 17:50:22] [root                            ] [INFO   ] [16472] [26172] [plc.py                ] [50  ] [Connected to PLC at 192.168.21.10]
+[2025-09-08 17:50:23] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:23] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 11]
+[2025-09-08 17:50:24] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:24] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:25] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:26] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 11]
+[2025-09-08 17:50:27] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:27] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:28] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:29] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:30] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 11]
+[2025-09-08 17:50:30] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:31] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:32] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 11]
+[2025-09-08 17:50:33] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+[2025-09-08 17:50:33] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [198 ] [Total detected items (above height, after NMS): 12]
+support SSE4.1
+[2025-09-08 17:50:34] [snap7.client                    ] [INFO   ] [16472] [26172] [client.py             ] [174 ] [disconnecting snap7 client]
+[2025-09-08 17:50:34] [root                            ] [INFO   ] [16472] [26172] [ocr.py                ] [265 ] [PLC connection closed]
+[2025-09-08 17:50:34] [snap7.client                    ] [INFO   ] [16472] [26172] [client.py             ] [92  ] [destroying snap7 client]

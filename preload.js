@@ -15,9 +15,10 @@
        
         getSkuButtons: () => ipcRenderer.invoke('get-sku-buttons'),
         runOcrConfig: (sku) => ipcRenderer.invoke('run-ocr-config', sku),
-        runBackCamConfig: (sku) => ipcRenderer.invoke('run-back-cam-config', sku),
-    runFrontCamConfig: (sku) => ipcRenderer.invoke('run-front-cam-config', sku),
-    runCldCamConfig: (sku) => ipcRenderer.invoke('run-cld-cam-config', sku),
+        runOcrConfigLine2: (sku) => ipcRenderer.invoke('run-ocr-config_line_2', sku),
+    //     runBackCamConfig: (sku) => ipcRenderer.invoke('run-back-cam-config', sku),
+    // runFrontCamConfig: (sku) => ipcRenderer.invoke('run-front-cam-config', sku),
+    // runCldCamConfig: (sku) => ipcRenderer.invoke('run-cld-cam-config', sku),
     updateDataCollectionToggleJson: (data) => ipcRenderer.send('update-data-collection-toggle-json', data),
     onDataCollectionToggleJsonUpdated: (callback) => ipcRenderer.on('data-collection-toggle-json-updated', (event, result) => callback(result)),
         

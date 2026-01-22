@@ -1,0 +1,50 @@
+INFO:root:0: AFTER_FILL-2 NET-1000M-192.168.21.5
+INFO:root:1: Before_FILL L2 NET-1000M-192.168.21.6
+INFO:root:2: Before_filling L NET-1000M-192.168.21.3
+INFO:root:3: CAM2_FOREIGN MATERIAL_FJ NET-1000M-192.168.21.2
+INFO:root:4: L1_OCR_CAM NET-1000M-192.168.21.223
+INFO:root:5: Line -2 code_cam NET-1000M-192.168.21.4
+INFO:root:acProductSeries:GiGeCamera
+acProductName:HT-GEF401GC
+acFriendlyName:AFTER_FILL-2
+acLinkName:6402-DC.A5.01.8D.A7.9B
+acDriverVersion:1.5.2.57
+acSensorType:CMOS 4.0M
+acPortType:NET-1000M-192.168.21.5
+acSn:055021220142
+uInstance:4
+INFO:snap7.client:creating snap7 client
+INFO:snap7.client:connecting to 192.168.21.10:102 rack 0 slot 1
+DEBUG:snap7.client:setting param number 2 to 102
+INFO:root:Connected to PLC at 192.168.21.10
+INFO:root:Using device: cuda
+support SSE4.1
+INFO:snap7.client:disconnecting snap7 client
+INFO:root:PLC connection closed
+INFO:snap7.client:destroying snap7 client
+INFO:root:0: AFTER_FILL-2 NET-1000M-192.168.21.5
+INFO:root:1: Before_FILL L2 NET-1000M-192.168.21.6
+INFO:root:2: Before_filling L NET-1000M-192.168.21.3
+INFO:root:3: CAM2_FOREIGN MATERIAL_FJ NET-1000M-192.168.21.2
+INFO:root:4: L1_OCR_CAM NET-1000M-192.168.21.223
+INFO:root:5: Line -2 code_cam NET-1000M-192.168.21.4
+INFO:root:acProductSeries:GiGeCamera
+acProductName:HT-GEF401GC
+acFriendlyName:AFTER_FILL-2
+acLinkName:6402-DC.A5.01.8D.A7.9B
+acDriverVersion:1.5.2.57
+acSensorType:CMOS 4.0M
+acPortType:NET-1000M-192.168.21.5
+acSn:055021220142
+uInstance:4
+INFO:snap7.client:creating snap7 client
+INFO:snap7.client:connecting to 192.168.21.10:102 rack 0 slot 1
+DEBUG:snap7.client:setting param number 2 to 102
+INFO:root:Connected to PLC at 192.168.21.10
+INFO:root:Using device: cuda
+INFO:root:Defect image saved: \\wsl.localhost\Ubuntu-22.04\home\hul\vin_images\images\10_32_22_35_86_2025-09-08T17:32:01_466534835.png
+DEBUG:snap7.client:db_read, db_number:1, start:8, size:1
+DEBUG:snap7.common:error text for 0x92746
+ERROR:snap7.common:b' ISO : An error occurred during send TCP : Connection reset by peer'
+ERROR:root:Failed to trigger PLC: b' ISO : An error occurred during send TCP : Connection reset by peer'
+support SSE4.1
